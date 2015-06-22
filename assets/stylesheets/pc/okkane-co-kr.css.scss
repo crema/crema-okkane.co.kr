@@ -1,0 +1,113 @@
+@import "compass/utilities/sprites";
+$sprites-sprite-dimensions: true;
+@import "custom/okkane-co-kr/*.png";
+@include all-okkane-co-kr-sprites;
+
+.clear { clear: both; }
+
+.new-review.widget {
+  .widget-heading.widget-heading--okkane-co-kr {
+    height: auto;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .widget-title.widget-title--okkane-co-kr {
+    strong {
+      display: block;
+      float: left;
+      @include okkane-co-kr-sprite(okkane-bg-review);
+      width: okkane-co-kr-sprite-width(okkane-bg-review);
+      height: okkane-co-kr-sprite-height(okkane-bg-review);
+      text-indent: -10000em;
+      overflow: hidden;
+    }
+    .divider { display: none; }
+    .weak {
+      line-height: 52px;
+      margin-left: 10px;
+      color: #242424;
+    }
+  }
+}
+
+
+#form-new-product-review {
+  .review-input-photos.review-input-photos--okkane-co-kr {
+    display: block;
+  }
+}
+
+#form-new-product-review {
+  .add-image-container.add-image-container--okkane-co-kr {
+    display: none;
+  }
+
+  .field-box-container.field-box-container--okkane-co-kr {
+    margin-left: 0;
+  }
+}
+
+body.products.reviews .image-fields-container .image-field .wrap,
+#review-edit-form .image-fields-container .image-field .wrap {
+  @include okkane-co-kr-sprite(okkane-btn-add-photo);
+  background-position: 10px 15px;
+  background-color: white;
+
+  .add-image-caption { display: none; }
+}
+
+body.products.reviews .image-fields-container .sprites-icon-camera,
+#review-edit-form .image-fields-container .sprites-icon-camera {
+  background-image: none;
+}
+
+
+// body.products.reviews .select2-container#s2id_review_score,
+// #review-edit-form .select2-container#s2id_review_score {
+//   border-radius: 10px;
+//   border-color: #999;
+// }
+
+// #form-new-product-review button.submit {
+//   border-radius: 10px;
+// }
+
+
+
+
+// reviews table
+
+body.products.reviews ul.reviews,
+body.products.reviews ul.header,
+#review-edit-form ul.reviews,
+#review-edit-form ul.header {
+  .col.index { display: none; }
+  .col.photo { left: 20px; }
+  .col.author { left: 60px; width: 100px; }
+  .col.title { padding-left: 200px; padding-right: 130px; }
+}
+
+
+
+body.products.reviews ul.reviews,
+body.products.reviews ul.header,
+#review-edit-form ul.reviews,
+#review-edit-form ul.header {
+  .sprites-camera {
+    @include okkane-co-kr-sprite(okkane-icon-camera);
+    width: okkane-co-kr-sprite-width(okkane-icon-camera);
+    height: okkane-co-kr-sprite-height(okkane-icon-camera);
+    top: 4px;
+  }
+
+  .sprites-text {
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    @include okkane-co-kr-sprite(okkane-icon-text);
+    width: okkane-co-kr-sprite-width(okkane-icon-text);
+    height: okkane-co-kr-sprite-height(okkane-icon-text);
+  }
+}

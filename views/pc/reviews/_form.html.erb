@@ -1,0 +1,54 @@
+<div class="reviews-form">
+  <% review = new_review(WrittenSource::BRAND_PC_PRODUCT) if !review %>
+  <%= content_tag :div, nil, id: 'data', data: {
+    allow_multiple_reviews_per_product: @brand.review_allow_multiple_reviews_per_product
+  } %>
+  <%= form_for review, url: review.new_record? ? post_reviews_path(group: @group_by) : review_path(review, group: @group_by), html: {multipart: true, autocomplete: 'off', id: 'form-new-product-review', class: "form-review form-product-review #{review.new_record? ? 'new_review' : 'edit_review'}", method: review.new_record? ? 'post' : 'patch'}, remote: true, validate: true, data: {login_required: !@brand.review_enable_nonmember_review?, review_message_default: @brand.review_message_default, already_posted: review.duplicate?, alert_requirement: @brand.review_alert_mileage_requirement_before_submit} do |f| %>
+    <div class="field-box message-field limit-count-container">
+      <%= render 'reviews/review_option_fields', f: f %>
+      <%= f.text_area(
+        :message,
+        class: "input-block autogrow count-limit #{review.new_record? ? 'new-review-form' : 'edit-review-form'}",
+        placeholder: (@brand.review_message_placeholder if @brand.review_default_message_type == ReviewDefaultMessageType::PLACEHOLDER),
+        maxlength: Settings.max_review_length,
+        col: 5,
+        cols: 5000, # HACK - IE8 textarea scroll bug
+        data: {login_required: !@brand.review_enable_nonmember_review?, up_counter: true, minimum_message_length: @brand.give_mileage_minimum_message_length},
+        ) %>
+      <div class='limit-counter'>0</div>
+
+      <div class="review-input-photos <%= 'review-input-photos--'+@brand.dir %> ">
+        <div class="input-button review-photos">
+          <%= content_tag :ul, class: "image-fields-container image-fields-container--#{@brand.dir}", data: {max_images_count: 4, images_count: review.images_count}  do %>
+            <% (1..[review.images_count+1, Settings.review_max_images_num].min).each do |i| %>
+              <%= render 'common/reviews/image_field', f: f, image_position: i, review: review %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-area-container">
+      <div class="field-box add-image-container <%= 'add-image-container--'+@brand.dir %>" style="cursor: pointer;">
+        <span class="sprites-icon-camera-black inline"></span>
+        <div class="description" data-org-text="+ 사진을 추가해 주세요">+ 사진을 추가해 주세요</div>
+      </div>
+
+      <div class="field-box-container <%= 'field-box-container--'+@brand.dir %>">
+        <div class="field-box">
+          <%= f.select :score, ReviewScore.values.collect {|score| [ReviewScore.t(score), score]}, {}, {class: 'select-rating'} %>
+        </div>
+      </div>
+      <%= f.hidden_field :product_id %>
+      <%= f.hidden_field :review_source %>
+      <%= f.hidden_field :sub_order_id %>
+      <%= content_tag :button, class: 'submit hoverable', type: 'submit', data: {disable_with: "저장 중..."} do %>
+        <div class="title"><span class="fa fa-check-circle-o"></span><%= review.new_record? ? '리뷰 등록하기' : '리뷰 수정하기' %></div>
+      <% end %>
+    </div>
+
+    <script type="text/x-jquery-tmpl" class="new-image-field">
+      <%= render('common/reviews/image_field', f: f, template: true, review: review) %>
+    </script>
+  <% end %>
+</div>
