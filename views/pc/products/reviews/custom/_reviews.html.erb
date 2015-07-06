@@ -9,7 +9,7 @@
     </li>
   </ul>
   <ul class="reviews reviews-product">
-    <%= render partial: 'products/review', collection: product_reviews, as: :review %>
+    <%= render partial: 'products/reviews/custom/review', collection: product_reviews, as: :review %>
   </ul>
   <div class="widget-footer">
     <%= paginate product_reviews, params: {review_id: nil}, remote: true, window: kaminari_window(params[:page].to_i, product_reviews.total_pages) %>
