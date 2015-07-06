@@ -111,3 +111,12 @@ body.products.reviews ul.header,
     height: okkane-co-kr-sprite-height(okkane-icon-text);
   }
 }
+
+
+
+body.products.reviews ul.reviews li.review, 
+body.products.reviews ul.header li.review, 
+#review-edit-form ul.reviews li.review, 
+#review-edit-form ul.header li.review {
+  line-height: 36px;
+}
