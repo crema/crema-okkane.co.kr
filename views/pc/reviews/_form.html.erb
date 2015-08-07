@@ -3,7 +3,7 @@
   <%= content_tag :div, nil, id: 'data', data: {
     allow_multiple_reviews_per_product: @brand.review_allow_multiple_reviews_per_product
   } %>
-  <%= form_for review, url: review.new_record? ? post_products_path : review_path(review, group: @group_by), html: {multipart: true, autocomplete: 'off', id: 'form-new-product-review', class: "form-review form-product-review #{review.new_record? ? 'new_review' : 'edit_review'}", method: review.new_record? ? 'post' : 'patch'}, remote: true, validate: true, data: {login_required: !@brand.review_enable_nonmember_review?, review_message_default: @brand.review_message_default, already_posted: review.duplicate?, alert_requirement: @brand.review_alert_mileage_requirement_before_submit} do |f| %>
+  <%= form_for review, url: review.new_record? ? post_products_path : review_path(review, widget_id: widget.id, group: @group_by), html: {multipart: true, autocomplete: 'off', id: 'form-new-product-review', class: "form-review form-product-review #{review.new_record? ? 'new_review' : 'edit_review'}", method: review.new_record? ? 'post' : 'patch'}, remote: true, validate: true, data: {login_required: !@brand.review_enable_nonmember_review?, review_message_default: @brand.review_message_default, already_posted: review.duplicate?, alert_requirement: @brand.review_alert_mileage_requirement_before_submit} do |f| %>
     <div class="field-box message-field limit-count-container">
       <%= render 'reviews/review_option_fields', f: f %>
       <%= f.text_area(

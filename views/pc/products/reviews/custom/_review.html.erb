@@ -1,8 +1,16 @@
-<%= content_tag_for :li, review, data: {product_url: review.product_url, expand_url: expand_review_path(review)} do %>
+<%
+unless review.position
+  if @first_review_position_in_page
+    review.position = @first_review_position_in_page - review_counter
+  else
+    review.position = review.id
+  end
+end
+%>
+<%= content_tag_for :li, review, data: {product_url: review.product_url, expand_url: expand_review_path(review, widget_id: widget.id, review: {position: review.position})} do %>
   <%= content_tag :div, class: 'review-content', data: {toggle: true} do %>
     <div class="review-content-summary">
-      <% review_position = @first_review_position_in_page - review_counter if @first_review_position_in_page %>
-      <div class="col index"><%= @first_review_position_in_page ? review_position : review.id %></div>
+      <div class="col index"><%= review.position %></div>
       <div class="col photo">
         <%= content_tag :span, nil, class: "#{review.images_count > 0 ? 'sprites-camera' : 'sprites-text'}" %>
       </div>
