@@ -3,8 +3,6 @@ $sprites-sprite-dimensions: true;
 @import "custom/okkane-co-kr/*.png";
 @include all-okkane-co-kr-sprites;
 
-.clear { clear: left; clear: right; }
-
 .new-review.widget {
   .widget-heading.widget-heading--okkane-co-kr {
     height: auto;
