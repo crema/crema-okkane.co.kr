@@ -271,10 +271,20 @@ $(document).on "change", "select.select-rating", ->
       $(this).addClass("star-empty")
 
 $(document).on "change", "select#category", ->
-  $.getScript($(this).val())
+  $select = $(this)
+  url = $select.data("url")
+  url_builder = new UrlBuilder(url)
+  category_id = $select.val()
+  url_builder.add_param("category_id", category_id) if category_id
+  $.getScript(url_builder.build())
 
 $(document).on "change", "select#sort_type", ->
-  $.getScript($(this).val())
+  $select = $(this)
+  url = $select.data("url")
+  url_builder = new UrlBuilder(url)
+  order = $select.val()
+  url_builder.add_param("order", order) if order
+  $.getScript(url_builder.build())
 
 $(document).on "click", ".comments-link-collapse", ->
   if $(this).hasClass("selected")
