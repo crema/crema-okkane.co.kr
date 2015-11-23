@@ -340,13 +340,7 @@ $(document).on "click", ".edit-nonmember", ->
     })
 
 $(document).on "click", ".field-box.add-image-container", ->
-  $form = $(this).closest("form")
-  $image_fields_container = $form.find(".image-fields-container")
-  images_count = $image_fields_container.data("images-count")
-  if images_count < $image_fields_container.data("max-images-count")
-    $form.find("input#review_image"+(images_count + 1)).trigger("click")
-  else
-    alert "리뷰 이미지는 최대 4장까지 가능합니다."
+  app.review_image.add_image_container()
 
 $(document).on "ajax:before", "form.form-review", (e) ->
   result = true
