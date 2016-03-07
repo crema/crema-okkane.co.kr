@@ -10,6 +10,7 @@
  *
  *= require ./main
  *= require ./lib/nanumgothic
+ *= require_tree ../common
  *= require_tree ./app
  *= require nanoscroller
  *= require select2
