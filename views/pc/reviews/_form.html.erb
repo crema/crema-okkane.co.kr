@@ -36,8 +36,8 @@
 
       <div class="review-input-photos <%= 'review-input-photos--'+@brand.dir %> ">
         <div class="input-button review-photos">
-          <%= content_tag :ul, class: "image-fields-container image-fields-container--#{@brand.dir}", data: {max_images_count: 4, images_count: review.images_count}  do %>
-            <% (1..[review.images_count+1, Settings.review_max_images_num].min).each do |i| %>
+          <%= content_tag :ul, class: "image-fields-container image-fields-container--#{@brand.dir}", data: {max_images_count: Review::MAX_IMAGES_COUNT, images_count: review.images_count}  do %>
+            <% (1..[review.images_count+1, Review::MAX_IMAGES_COUNT].min).each do |i| %>
               <%= render 'common/reviews/image_field', f: f, image_position: i, review: review %>
             <% end %>
           <% end %>
