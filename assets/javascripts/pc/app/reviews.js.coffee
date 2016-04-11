@@ -334,18 +334,12 @@ $(document).on "click", ".delete-review, .edit-review, .new_review, .review-edit
       $old_form.remove()
 
 $(document).on "click", ".edit-nonmember", ->
-  $action = $(this).data("action")
-  if $action == "delete"
-    action = "삭제 됩니다."
-    type = "DELETE"
-  else if $action == "edit"
-    action = "수정할 수 있습니다."
-    type = "POST"
-  password = prompt "작성시 입력한 비밀번호를 입력하시면 " + action
+  $link = $(this)
+  password = prompt($link.data("prompt"))
   if password != null && password != ""
     $.ajax({
-      url: $(this).data("path"),
-      type: type,
+      url: $link.data("path"),
+      type: $link.data("action"),
       data: {password: password}
     })
 
