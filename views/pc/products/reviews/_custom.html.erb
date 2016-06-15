@@ -55,7 +55,7 @@
                     <% else %>
                       <% message.interpolate_safe(args).br_to_break.lines.each_with_index do |line, i| %>
                         <%= line.html_safe %><br>
-                        <% break if i == 1%>
+                        <% break if i == 1 %>
                       <% end %>
                     <% end %>
                   </div>
