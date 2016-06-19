@@ -53,9 +53,9 @@
                     <% if message.blank? %>
                       <%= t('reviews.review_reward_short_message', args).html_safe %>
                     <% else %>
-                      <% (message.interpolation_safe % args).br_to_break.lines.each_with_index do |line, i| %>
+                      <% message.interpolate_safe(args).br_to_break.lines.each_with_index do |line, i| %>
                         <%= line.html_safe %><br>
-                        <% break if i == 1%>
+                        <% break if i == 1 %>
                       <% end %>
                     <% end %>
                   </div>
