@@ -1,6 +1,6 @@
 <% title t('reviews.product_reviews') %>
 <% content_for :content do %>
-  <% if @product && (@brand.review_writable? || !@product_reviews.empty?) %>
+  <% if display_product_reviews(@product, @product_reviews) %>
     <% display_write_form = @brand.review_writable? && display_write_form?(@product) %>
     <%= content_tag :div, class: "widget new-review first #{'no-writable' if !@brand.review_writable?}" do %>
       <div class="widget-heading <%= 'widget-heading--' + @brand.dir %>">
