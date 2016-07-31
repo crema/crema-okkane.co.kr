@@ -1,83 +1,81 @@
 <% title t('reviews.product_reviews') %>
 <% content_for :content do %>
-  <% if @product && (@brand.review_writable? || !@reviews.empty?) %>
-    <% display_write_form = @brand.review_writable? && display_write_form?(@product) %>
-    <%= content_tag :div, class: "widget new-review first #{'no-writable' if !@brand.review_writable?}" do %>
-      <div class="widget-heading <%= 'widget-heading--' + @brand.dir %>">
-        <div class="widget-title <%= 'widget-title--' + @brand.dir %>">
-          <%= widget.title.html_safe %>
-        </div>
-        <% if @brand.reviews_index_url.present? %>
-          <%= content_tag :div, widget.reviews_button_title, class: 'rfloat btn show-reviews-index', data: {reviews_index_url: @brand.reviews_index_url} %>
-        <% end %>
+  <% display_write_form = @brand.review_writable? && display_write_form?(@product) %>
+  <%= content_tag :div, class: "widget new-review first #{'no-writable' if !@brand.review_writable?}" do %>
+    <div class="widget-heading <%= 'widget-heading--' + @brand.dir %>">
+      <div class="widget-title <%= 'widget-title--' + @brand.dir %>">
+        <%= widget.title.html_safe %>
       </div>
-      <div class='clear'></div>
-      <% if display_write_form %>
-        <div class="widget-body">
-          <%= render 'reviews/form' %>
-          <% if @brand.review_enable_nonmember_review? && !current_user %>
-            <div id="nonmember-review-tmpl" class="hidden">
-              <div class="nonmember-review">
-                <div class="content-container">
-                  <div class="lfloat">
-                    <div class="input-container">
-                      <div class="key">이름</div>
-                      <%= text_field_tag 'review[user_name]', nil, id: 'review_user_name' %>
-                    </div>
-                    <div class="input-container">
-                      <div class="key">비밀번호</div>
-                      <%= password_field_tag 'review[password]', nil, id: 'review_password' %>
-                    </div>
+      <% if @brand.reviews_index_url.present? %>
+        <%= content_tag :div, widget.reviews_button_title, class: 'rfloat btn show-reviews-index', data: {reviews_index_url: @brand.reviews_index_url} %>
+      <% end %>
+    </div>
+    <div class='clear'></div>
+    <% if display_write_form %>
+      <div class="widget-body">
+        <%= render 'reviews/form' %>
+        <% if @brand.review_enable_nonmember_review? && !current_user %>
+          <div id="nonmember-review-tmpl" class="hidden">
+            <div class="nonmember-review">
+              <div class="content-container">
+                <div class="lfloat">
+                  <div class="input-container">
+                    <div class="key">이름</div>
+                    <%= text_field_tag 'review[user_name]', nil, id: 'review_user_name' %>
                   </div>
-                  <div class="rfloat">
-                    <div class="hint">* 현재 비회원으로 리뷰작성 중 입니다.</div>
-                    <a class="link-login">로그인 후 작성하기</a>
+                  <div class="input-container">
+                    <div class="key">비밀번호</div>
+                    <%= password_field_tag 'review[password]', nil, id: 'review_password' %>
                   </div>
+                </div>
+                <div class="rfloat">
+                  <div class="hint">* 현재 비회원으로 리뷰작성 중 입니다.</div>
+                  <a class="link-login">로그인 후 작성하기</a>
                 </div>
               </div>
             </div>
-          <% elsif current_user && @sub_order %>
-            <script id="review-policy-tmpl" type="text/x-jquery-tmpl">
-              <div class="review-policy">
-                <div class="content-container">
-                  <div class="lfloat">
-                    <%
-                      args = {
-                        user_name: current_user.name,
-                        max_best_mileage: number_with_delimiter(@brand.max_basic_mileage_for_text_review + @brand.give_mileage_to_best_review),
-                        max_mileage: number_with_delimiter(@brand.max_basic_mileage_for_text_review),
-                        photo_queen_reward: number_with_delimiter(@brand.give_mileage_to_best_review)
-                      }
-                      message = @brand.review_reward_notice_short
-                    %>
-                    <% if message.blank? %>
-                      <%= t('reviews.review_reward_short_message', args).html_safe %>
-                    <% else %>
-                      <% message.interpolate_safe(args).br_to_break.lines.each_with_index do |line, i| %>
-                        <%= line.html_safe %><br>
-                        <% break if i == 1 %>
-                      <% end %>
+          </div>
+        <% elsif current_user && @sub_order %>
+          <script id="review-policy-tmpl" type="text/x-jquery-tmpl">
+            <div class="review-policy">
+              <div class="content-container">
+                <div class="lfloat">
+                  <%
+                    args = {
+                      user_name: current_user.name,
+                      max_best_mileage: number_with_delimiter(@brand.max_basic_mileage_for_text_review + @brand.give_mileage_to_best_review),
+                      max_mileage: number_with_delimiter(@brand.max_basic_mileage_for_text_review),
+                      photo_queen_reward: number_with_delimiter(@brand.give_mileage_to_best_review)
+                    }
+                    message = @brand.review_reward_notice_short
+                  %>
+                  <% if message.blank? %>
+                    <%= t('reviews.review_reward_short_message', args).html_safe %>
+                  <% else %>
+                    <% message.interpolate_safe(args).br_to_break.lines.each_with_index do |line, i| %>
+                      <%= line.html_safe %><br>
+                      <% break if i == 1 %>
                     <% end %>
-                  </div>
-                  <% if !@brand.review_reward_notice_html.blank? %>
-                    <div class="rfloat">
-                      <a class="view-detail hoverable">자세히 보기</a>
-                    </div>
                   <% end %>
                 </div>
+                <% if !@brand.review_reward_notice_html.blank? %>
+                  <div class="rfloat">
+                    <a class="view-detail hoverable">자세히 보기</a>
+                  </div>
+                <% end %>
               </div>
+            </div>
+          </script>
+          <% if !@brand.review_reward_notice_html.blank? %>
+            <script id="review-policy-detail-tmpl" type="text/x-jquery-tmpl">
+              <%= @brand.review_reward_notice_html %>
             </script>
-            <% if !@brand.review_reward_notice_html.blank? %>
-              <script id="review-policy-detail-tmpl" type="text/x-jquery-tmpl">
-                <%= @brand.review_reward_notice_html %>
-              </script>
-            <% end %>
           <% end %>
-          <%= render 'common/shared/form_upload_image' %>
-        </div>
-      <% end %>
+        <% end %>
+        <%= render 'common/shared/form_upload_image' %>
+      </div>
     <% end %>
-    <%= render 'products/reviews/summary', klass: ('without_write_form' unless display_write_form) %>
-    <%= render 'products/reviews/custom/reviews' %>
   <% end %>
+  <%= render 'products/reviews/summary', klass: ('without_write_form' unless display_write_form) %>
+  <%= render 'products/reviews/custom/reviews' %>
 <% end %>
