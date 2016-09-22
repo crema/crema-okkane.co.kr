@@ -40,22 +40,9 @@
             <div class="review-policy">
               <div class="content-container">
                 <div class="lfloat">
-                  <%
-                    args = {
-                      user_name: current_user.name,
-                      max_best_mileage: number_with_delimiter(@brand.max_basic_mileage_for_text_review + @brand.give_mileage_to_best_review),
-                      max_mileage: number_with_delimiter(@brand.max_basic_mileage_for_text_review),
-                      photo_queen_reward: number_with_delimiter(@brand.give_mileage_to_best_review)
-                    }
-                    message = @brand.review_reward_notice_short
-                  %>
-                  <% if message.blank? %>
-                    <%= t('reviews.review_reward_short_message', args).html_safe %>
-                  <% else %>
-                    <% message.interpolate_safe(args).br_to_break.lines.each_with_index do |line, i| %>
-                      <%= line.html_safe %><br>
-                      <% break if i == 1 %>
-                    <% end %>
+                  <% review_reward_notice_message.br_to_break.lines.each_with_index do |line, i| %>
+                    <%= line.html_safe %><br>
+                    <% break if i == 1 %>
                   <% end %>
                 </div>
                 <% if !@brand.review_reward_notice_html.blank? %>
