@@ -1,5 +1,5 @@
 <div class="reviews-form">
-  <% review = new_review(WrittenSource::BRAND_PC_PRODUCT) if !review %>
+  <% review = new_review(review_source: WrittenSource::BRAND_PC_PRODUCT) if !review %>
   <%= content_tag :div, nil, id: 'data', data: {
     allow_multiple_reviews_per_product: @brand.review_allow_multiple_reviews_per_product
   } %>
