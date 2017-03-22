@@ -43,9 +43,6 @@
 body.products.reviews .image-fields-container .image-field .wrap,
 #review-edit-form .image-fields-container .image-field .wrap {
   @include sprites-okkane-btn-add-photo;
-  background-position: 10px 15px;
-  background-color: white;
-
   .add-image-caption { display: none; }
 }
 
