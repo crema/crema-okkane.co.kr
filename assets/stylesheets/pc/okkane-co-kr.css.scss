@@ -1,7 +1,5 @@
-@import "compass/utilities/sprites";
-$sprites-sprite-dimensions: true;
-@import "custom/okkane-co-kr/*.png";
-@include all-okkane-co-kr-sprites;
+@import './lib/common';
+@import './lib/sprites';
 
 .new-review.widget {
   .widget-heading.widget-heading--okkane-co-kr {
@@ -14,9 +12,7 @@ $sprites-sprite-dimensions: true;
     strong {
       display: block;
       float: left;
-      @include okkane-co-kr-sprite(okkane-bg-review);
-      width: okkane-co-kr-sprite-width(okkane-bg-review);
-      height: okkane-co-kr-sprite-height(okkane-bg-review);
+      @include sprites-okkane-bg-review;
       text-indent: -10000em;
       overflow: hidden;
     }
@@ -48,8 +44,7 @@ $sprites-sprite-dimensions: true;
 
 body.products.reviews .image-fields-container .image-field .wrap,
 #review-edit-form .image-fields-container .image-field .wrap {
-  @include okkane-co-kr-sprite(okkane-btn-add-photo);
-  background-position: 10px 15px;
+  @include sprites-okkane-btn-add-photo;
   background-color: white;
 
   .add-image-caption { display: none; }
@@ -59,22 +54,6 @@ body.products.reviews .image-fields-container .sprites-icon-camera,
 #review-edit-form .image-fields-container .sprites-icon-camera {
   background-image: none;
 }
-
-
-// body.products.reviews .select2-container#s2id_review_score,
-// #review-edit-form .select2-container#s2id_review_score {
-//   border-radius: 10px;
-//   border-color: #999;
-// }
-
-// #form-new-product-review button.submit {
-//   border-radius: 10px;
-// }
-
-
-
-
-// reviews table
 
 body.products.reviews ul.reviews,
 body.products.reviews ul.header,
@@ -86,16 +65,12 @@ body.products.reviews ul.header,
   .col.title { padding-left: 200px; padding-right: 130px; }
 }
 
-
-
 body.products.reviews ul.reviews,
 body.products.reviews ul.header,
 #review-edit-form ul.reviews,
 #review-edit-form ul.header {
   .sprites-camera {
-    @include okkane-co-kr-sprite(okkane-icon-camera);
-    width: okkane-co-kr-sprite-width(okkane-icon-camera);
-    height: okkane-co-kr-sprite-height(okkane-icon-camera);
+    @include sprites-okkane-icon-camera;
     top: 4px;
   }
 
@@ -104,17 +79,13 @@ body.products.reviews ul.header,
     position: absolute;
     top: 5px;
     left: 10px;
-    @include okkane-co-kr-sprite(okkane-icon-text);
-    width: okkane-co-kr-sprite-width(okkane-icon-text);
-    height: okkane-co-kr-sprite-height(okkane-icon-text);
+    @include sprites-okkane-icon-text;
   }
 }
 
-
-
-body.products.reviews ul.reviews li.review, 
-body.products.reviews ul.header li.review, 
-#review-edit-form ul.reviews li.review, 
+body.products.reviews ul.reviews li.review,
+body.products.reviews ul.header li.review,
+#review-edit-form ul.reviews li.review,
 #review-edit-form ul.header li.review {
   line-height: 36px;
 }
