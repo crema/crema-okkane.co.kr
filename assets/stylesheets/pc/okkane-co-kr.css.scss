@@ -50,6 +50,12 @@ body.products.reviews .image-fields-container .image-field .wrap,
   .add-image-caption { display: none; }
 }
 
+body.products.reviews .image-fields-container .image-field .wrap,
+#review-edit-form .image-fields-container .image-field .wrap .review-image-preview {
+  width: 75px;
+  height: 75px;
+}
+
 body.products.reviews .image-fields-container .sprites-icon-camera,
 #review-edit-form .image-fields-container .sprites-icon-camera {
   background-image: none;
@@ -78,7 +84,6 @@ body.products.reviews ul.header,
     display: block;
     position: absolute;
     top: 5px;
-    left: 10px;
     @include sprites-okkane-icon-text;
   }
 }
