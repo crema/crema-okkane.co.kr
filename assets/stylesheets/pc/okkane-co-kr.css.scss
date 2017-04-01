@@ -42,12 +42,23 @@
   }
 }
 
-body.products.reviews .image-fields-container .image-field .wrap,
-#review-edit-form .image-fields-container .image-field .wrap {
-  @include sprites-okkane-btn-add-photo;
-  background-color: white;
+body.products.reviews, #review-edit-form {
+  .image-fields-container .input-image-container {
+    top: 0;
+    bottom: 0;
+    margin-top: 0;
+    background-color: white;
 
-  .add-image-caption { display: none; }
+    .sprites-icon-camera {
+      @include sprites-okkane-btn-add-photo;
+      display: block;
+      margin: 10px auto;
+    }
+
+    .add-image-caption {
+      display: none;
+    }
+  }
 }
 
 body.products.reviews .image-fields-container .sprites-icon-camera,
